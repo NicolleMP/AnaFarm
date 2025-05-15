@@ -1,6 +1,13 @@
 <script>
-
+export default {
+  methods: {
+    irParaLogin() {
+      this.$router.push ('/login')
+    }
+  }
+}
 </script>
+
 
 <template>
   <div class="register-container">
@@ -22,7 +29,7 @@
 
           <div class="login">
             <span>Já possui conta?</span>
-            <button type="button">Login</button>
+            <button @click="irParaLogin" type="button">Login</button>
           </div>
         </form>
       </div>
