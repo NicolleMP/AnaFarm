@@ -115,4 +115,51 @@ button[type="submit"] {
 }
 
 
+.login {
+  margin-top: 0.9375rem; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem; 
+}
+
+.login span {
+  font-size: 0.875rem; 
+}
+
+.login button {
+  margin-top: 0.3125rem; 
+  background-color: transparent;
+  color: #ff69b4;
+  border: 0.0625rem solid #ff69b4; 
+  padding: 0.625rem; 
+  border-radius: 0.3125rem; 
+  cursor: pointer;
+}
+
+.login button:hover {
+  background-color: #ff69b4;
+  color: white;
+}
+
+.info-register {
+  flex: 1;
+  color: white;
+  padding: 2.5rem; 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: linear-gradient(to right, #0cb7f2, #ff69b4);
+}
+
+.info-register h3 {
+  font-size: 1.5rem; 
+  margin-bottom: 0.9375rem; 
+}
+
+.info-register p {
+  font-size: 1rem; 
+  line-height: 1.5;
+}
+
 </style>
