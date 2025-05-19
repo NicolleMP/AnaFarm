@@ -2,7 +2,51 @@
 export default {
   methods: {
     irParaLogin() {
-      this.$router.push ('/login')
+      this.$router.push('/login');
+    },
+
+    validarFormulario(event) {
+      event.preventDefault();
+
+      const [nome, email, senha, repetirSenha] = [
+        event.target[0].value.trim(),
+        event.target[1].value.trim(),
+        event.target[2].value.trim(),
+        event.target[3].value.trim()
+      ];
+
+      const validacoes = [
+        {
+          campo: nome,
+          valido: /^[A-Za-zÀ-ÿ\s]+$/.test(nome),
+          mensagem: "O nome deve conter apenas letras e espaços."
+        },
+        {
+          campo: email,
+          valido: /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email),
+          mensagem: "Digite um e-mail válido."
+        },
+
+        {
+          campo: senha,
+          valido: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/.test(senha),
+          mensagem: "A senha deve ter no mínimo 8 caracteres, com letras maiúsculas, minúsculas, números e símbolos."
+        },
+
+        {
+          campo: repetirSenha,
+          valido: senha === repetirSenha,
+          mensagem: "As senhas não coincidem."
+        }
+      ];
+
+      const erro = validacoes.find(v => !v.valido);
+      if (erro) {
+        alert(erro.mensagem);
+        return;
+      }
+
+      alert("Cadastro realizado com sucesso!");
     }
   }
 }
@@ -17,7 +61,8 @@ export default {
           <img src="../../assets/logo.png" alt="Logo">
           <h2>Seja bem-vindo ao Anafarm</h2>
         </div>
-        <form>
+        <form  @submit.prevent="validarFormulario">
+        
           <p>Por favor, crie sua conta</p>
 
           <input type="text" placeholder="Nome completo">
