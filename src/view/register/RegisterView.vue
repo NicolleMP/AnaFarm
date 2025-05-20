@@ -2,6 +2,7 @@
 export default {
   methods: {
     irParaLogin() {
+      this.$router.push ('/login')
       this.$router.push('/login');
     },
 
@@ -50,6 +51,7 @@ export default {
     }
   }
 }
+
 </script>
 
 
@@ -61,8 +63,8 @@ export default {
           <img src="../../assets/logo.png" alt="Logo">
           <h2>Seja bem-vindo ao Anafarm</h2>
         </div>
-        <form  @submit.prevent="validarFormulario">
-        
+        <form @submit.prevent="validarFormulario">
+
           <p>Por favor, crie sua conta</p>
 
           <input type="text" placeholder="Nome completo">
