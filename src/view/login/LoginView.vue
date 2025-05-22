@@ -5,9 +5,9 @@
         <img src="../../assets/logo.png" alt="Logo AnaFarm" />
         <h2 class="title">Seja bem-vindo ao Anafarm</h2>
         <p class="text">Faça seu login</p>
-        <form class="form">
-          <input type="text" placeholder="Nome" required />
-          <input type="password" placeholder="Senha" required />
+        <form class="form" @submit.prevent="loginUser">
+          <input type="email" placeholder="Email" v-model="form.email" />
+          <input type="password" placeholder="Senha" v-model="form.password" />
           <button class="btn" type="submit">Entrar</button>
         </form>
         <a href="/">
@@ -15,9 +15,9 @@
         </a>
         <div class="noCount">
           <p class="text">Não possui uma conta?</p>
-          <router-link to="/register" class="btn-count"
-            >Criar uma conta</router-link
-          >
+          <button class="btn" @click="irParaRegister" type="button">
+            Criar nova conta
+          </button>
         </div>
       </div>
       <div class="second-column">
@@ -35,6 +35,49 @@
     </div>
   </div>
 </template>
+
+<script>
+import api from "../../services/api.js";
+
+export default {
+  data() {
+    return {
+      form: {
+        email: "",
+        password: "",
+      },
+    };
+  },
+  methods: {
+    async loginUser(event) {
+      event.preventDefault();
+
+      const { email, password } = this.form;
+
+      if (!email || !password) {
+        alert("Por favor, preencha todos os campos.");
+        return;
+      }
+
+      try {
+        await api.post("/users/login", {
+          email: this.form.email,
+          password: this.form.password,
+        });
+
+        alert("Login realizado com sucesso!");
+        this.form = { email: "", password: "" };
+      } catch (error) {
+        console.error(
+          "Erro ao fazer login:",
+          error.response?.data || error.message
+        );
+        alert("Usuário ou senha inválidos!");
+      }
+    },
+  },
+};
+</script>
 
 <style>
 body {
@@ -114,28 +157,14 @@ input {
   border-radius: 5px;
 }
 
+a {
+  text-decoration: none;
+}
+
 .noCount {
   display: flex;
   gap: 3.5rem;
   align-items: center;
-}
-
-.btn-count {
-  cursor: pointer;
-  font-size: 15px;
-  font-weight: 100;
-  text-decoration: none;
-  padding: 10px;
-  background-color: transparent;
-  color: #fff;
-  border: 2px solid #0cb7f2;
-  border-radius: 10px;
-  font-weight: 700;
-}
-
-.btn-count:hover {
-  background-color: #0cb7f2;
-  color: #424242;
 }
 
 .second-column {
