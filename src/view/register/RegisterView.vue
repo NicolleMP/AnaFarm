@@ -15,9 +15,9 @@
           <input type="password" v-model="form.repetirSenha" placeholder="Repita sua senha" required>
           <button type="submit">Registrar-se</button>
           <div class="login">
-                    <p>Já possui conta?</p>
-                    <button type="button">Login</button>
-          </div> 
+            <p>Já possui conta?</p>
+            <button type="button" @click="irParaLogin">Login</button> <!-- <-- ADICIONADO -->
+          </div>
         </form>
       </div>
       <div class="info-register">
@@ -83,9 +83,9 @@ export default {
 
       try {
         await api.post('/users/register', {
-        username: this.form.nome, // se quiser nome como username
-        email: this.form.email,
-        password: this.form.senha,
+          username: this.form.nome,
+          email: this.form.email,
+          password: this.form.senha,
         });
         alert('Cadastro realizado com sucesso!');
         this.form = { nome: '', email: '', senha: '', repetirSenha: '' };
@@ -94,12 +94,15 @@ export default {
         alert(`Falha no cadastro: ${error.response?.status === 401 ? 'Acesso não autorizado (401)' : error.response?.data || 'Erro desconhecido'}`);
       }
     },
+// a rota para tela login
+    irParaLogin() {
+      this.$router.push('/login');
+    },
   },
 };
 </script>
 
 <style>
-
 * {
   margin: 0;
   padding: 0;
@@ -181,32 +184,27 @@ button[type="submit"] {
   font-size: 1rem;
   line-height: 1.5;
 }
-
 .login {
-  margin-top: 0.9375rem; 
+  margin-top: 0.9375rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 0.625rem; 
+  gap: 0.625rem;
 }
-
 .login span {
-  font-size: 0.875rem; 
+  font-size: 0.875rem;
 }
-
 .login button {
-  margin-top: 0.3125rem; 
+  margin-top: 0.3125rem;
   background-color: transparent;
   color: #ff69b4;
-  border: 0.0625rem solid #ff69b4; 
-  padding: 0.625rem; 
-  border-radius: 0.3125rem; 
+  border: 0.0625rem solid #ff69b4;
+  padding: 0.625rem;
+  border-radius: 0.3125rem;
   cursor: pointer;
 }
-
 .login button:hover {
   background-color: #ff69b4;
   color: white;
 }
-
 </style>
