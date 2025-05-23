@@ -77,8 +77,23 @@ export default {
   transition: color 0.3s ease;
 }
 
+.nav a::before {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #ffd700;
+  transition: width 0.3s ease;
+}
+
+.nav a:hover::before {
+  width: 100%;
+}
+
 .nav a:hover {
-  color: #ffd700; 
+  color: #ffd700;
 }
 
 .user-icon {

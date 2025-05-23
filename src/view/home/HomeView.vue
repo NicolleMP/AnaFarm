@@ -66,16 +66,18 @@ export default {
       <h2 class="titulo-produtos">Nossos Produtos</h2>
 
       <div class="container-produtos">
-        <div 
-          v-for="(produto, index) in produtos"
-          :key="produto.nome"
-          class="card-produto"
-          tabindex="0"
-          role="region"
-          :aria-label="'Produto ' + produto.nome"
-          @mouseenter="hoverIndex = index"
-          @mouseleave="hoverIndex = null"
-        >
+                  <div 
+              v-for="(produto, index) in produtos"
+              :key="produto.nome"
+              class="card-produto"
+              :class="{ 'hovered': hoverIndex === index }"
+              tabindex="0"
+              role="region"
+              :aria-label="'Produto ' + produto.nome"
+              @mouseenter="hoverIndex = index"
+              @mouseleave="hoverIndex = null"
+            >
+
           <img 
             :src="produto.img" 
             :alt="produto.nome" 
@@ -168,13 +170,12 @@ export default {
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .chamada-cta button:hover,
 .chamada-cta button:focus {
-  background-color: #0acfcf;
+  background-color: #9b04a8;
   transform: translateY(-2px);
   outline: none;
 }
@@ -186,7 +187,7 @@ export default {
   text-transform: uppercase;
   letter-spacing: 0.15em;
   margin: 3rem 0 2rem;
-  background: linear-gradient(90deg, #0cf23e, #2b7a4b, #e67e22);
+  background: linear-gradient(90deg, #00a5f1, #f006dc);
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
@@ -196,10 +197,10 @@ export default {
 .titulo-produtos::after {
   content: '';
   display: block;
-  width: 900px; /* mais comprida */
-  height: 0.4rem; /* mesma espessura */
-  background: linear-gradient(100deg, #0cf23e, #2b7a4b, #e67e22);
-  margin: 10px auto 0; /* espaço superior */
+  width: 900px; 
+  height: 0.4rem; 
+  background: linear-gradient(100deg, #00a5f1, #ee00e2);
+  margin: 10px auto 0; 
   border-radius: 8px;
 }
 
@@ -237,6 +238,10 @@ export default {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
   transform: translateY(-8px);
   outline: none;
+}
+.hovered {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  transform: translateY(-8px);
 }
 
 .produto-imagem {
@@ -277,12 +282,12 @@ export default {
 .preco {
   font-size: 1.3rem;
   font-weight: 700;
-  color: #ff6600;
+  color: #ca0df0;
   margin-bottom: 1.2rem;
 }
 
 .botao-comprar {
-  background-color: #28a745; 
+  background-color: #09addf; 
   color: #ffffff;
   border: none;
   padding: 0.75rem 1.2rem;
@@ -291,12 +296,11 @@ export default {
   font-weight: 600;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
-  box-shadow: 0 3px 8px rgba(40, 167, 69, 0.3);
 }
 
 .botao-comprar:hover,
 .botao-comprar:focus {
-  background-color: #218838;
+  background-color: #275cbe;
   transform: translateY(-2px);
   outline: none;
 }
@@ -358,5 +362,83 @@ export default {
     max-width: 320px;
   }
 }
+.container-produtos {
+  max-width: 1240px;
+  margin: 0 auto 5rem auto;
+  padding: 0 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; 
+  gap: 1rem;
+}
+
+.card-produto {
+  width: calc(25% - 1rem); 
+  min-height: 420px;
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 1.8rem 1.6rem;
+  color: #333333;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  transition: box-shadow 0.3s ease, transform 0.25s ease;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+@media (max-width: 1024px) {
+  .container-produtos {
+    justify-content: center;
+  }
+
+  .card-produto {
+    width: calc(33.33% - 1rem);
+  }
+}
+
+@media (max-width: 720px) {
+  .container-produtos {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .card-produto {
+    width: 90%; 
+    max-width: 320px;
+  }
+}
+.card-produto {
+  width: calc(25% - 1rem); 
+  min-height: 420px;
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 1.8rem 1.6rem;
+  color: #333333;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  transition: box-shadow 0.3s ease, transform 0.25s ease;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.card-produto:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  transform: translateY(10px); 
+}
+.card-produto:not(:hover) {
+  transform: translateY(0); 
+  transition: transform 0.3s ease; 
+}
+
+.card-produto:hover .produto-imagem {
+  transform: scale(1.05); 
+}
+
 </style>
 
