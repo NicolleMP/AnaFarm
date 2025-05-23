@@ -14,6 +14,10 @@
           <input type="password" v-model="form.senha" placeholder="Crie uma senha segura" required>
           <input type="password" v-model="form.repetirSenha" placeholder="Repita sua senha" required>
           <button type="submit">Registrar-se</button>
+          <div class="login">
+                    <p>Já possui conta?</p>
+                    <button type="button">Login</button>
+          </div> 
         </form>
       </div>
       <div class="info-register">
@@ -177,4 +181,32 @@ button[type="submit"] {
   font-size: 1rem;
   line-height: 1.5;
 }
+
+.login {
+  margin-top: 0.9375rem; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem; 
+}
+
+.login span {
+  font-size: 0.875rem; 
+}
+
+.login button {
+  margin-top: 0.3125rem; 
+  background-color: transparent;
+  color: #ff69b4;
+  border: 0.0625rem solid #ff69b4; 
+  padding: 0.625rem; 
+  border-radius: 0.3125rem; 
+  cursor: pointer;
+}
+
+.login button:hover {
+  background-color: #ff69b4;
+  color: white;
+}
+
 </style>
