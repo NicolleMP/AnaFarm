@@ -3,7 +3,7 @@
     <div class="first-content content">
       <div class="first-column">
         <img src="../../assets/logo.png" alt="Logo AnaFarm" />
-        <h2 class="title">Seja bem-vindo ao Anafarm</h2>
+        <h2 class="title">Seja bem-vindo à Anafarm</h2>
         <p class="text">Faça seu login</p>
         <form class="form" @submit.prevent="loginUser">
           <input type="email" placeholder="Email" v-model="form.email" />
@@ -74,6 +74,10 @@ export default {
         );
         alert("Usuário ou senha inválidos!");
       }
+    },
+    //  ALTERAÇÃO: metodo para ir para a tela de registro
+    irParaRegister() {
+      this.$router.push("/register");
     },
   },
 };
