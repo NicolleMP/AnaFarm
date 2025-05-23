@@ -1,4 +1,4 @@
-<!-- src/view/register/RegisterView.vue -->
+
 <template>
   <div class="register-container">
     <div class="register-wrapper">
@@ -16,7 +16,7 @@
           <button type="submit">Registrar-se</button>
           <div class="login">
             <p>Já possui conta?</p>
-            <button type="button" @click="irParaLogin">Login</button> <!-- <-- ADICIONADO -->
+            <button type="button" @click="irParaLogin">Login</button> 
           </div>
         </form>
       </div>
@@ -94,7 +94,7 @@ export default {
         alert(`Falha no cadastro: ${error.response?.status === 401 ? 'Acesso não autorizado (401)' : error.response?.data || 'Erro desconhecido'}`);
       }
     },
-// a rota para tela login
+
     irParaLogin() {
       this.$router.push('/login');
     },
