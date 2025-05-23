@@ -5,7 +5,7 @@
       <div class="form-register">
         <div class="logo">
           <img src="../../assets/logo.png" alt="Logo">
-          <h2>Seja bem-vindo ao Anafarm</h2>
+          <h2>Seja bem-vindo à Anafarm</h2>
         </div>
         <form @submit.prevent="validarFormulario">
           <p>Por favor, crie sua conta</p>
