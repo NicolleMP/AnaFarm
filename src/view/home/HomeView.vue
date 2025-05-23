@@ -1,7 +1,7 @@
 <script>
 import AppHeader from '@/components/AppHeader.vue'
 import AppFooter from '@/components/AppFooter.vue'
-import { ref } from 'vue'
+import AppCards from '@/components/AppCards.vue'
 
 import oleoEssencial from '@/assets/oleo_essencial.png'
 import chasNaturais from '@/assets/chas_naturais.png'
@@ -19,11 +19,10 @@ import boldo from '@/assets/boldo.png'
 export default {
   components: {
     AppHeader,
-    AppFooter
+    AppFooter,
+    AppCards
   },
   setup() {
-    const hoverIndex = ref(null)
-
     const produtos = [
       { nome: 'Óleo Essencial', preco: 'R$ 49,90', img: oleoEssencial, descricaoCurta: 'Relaxante e terapêutico', descricaoLonga: 'Óleo essencial puro, ideal para relaxamento, aromaterapia e alívio de tensões musculares. Produto 100% natural, extraído de plantas selecionadas.' },
       { nome: 'Chás Naturais', preco: 'R$ 19,90', img: chasNaturais, descricaoCurta: 'Saúde e bem-estar', descricaoLonga: 'Mistura especial de ervas selecionadas para promover saúde, bem-estar e equilíbrio do organismo. Auxilia na digestão e possui ação antioxidante.' },
@@ -40,8 +39,7 @@ export default {
     ]
 
     return {
-      produtos,
-      hoverIndex
+      produtos
     }
   }
 }
@@ -64,61 +62,15 @@ export default {
 
     <section id="produtos">
       <h2 class="titulo-produtos">Nossos Produtos</h2>
-
       <div class="container-produtos">
-                  <div 
-              v-for="(produto, index) in produtos"
-              :key="produto.nome"
-              class="card-produto"
-              :class="{ 'hovered': hoverIndex === index }"
-              tabindex="0"
-              role="region"
-              :aria-label="'Produto ' + produto.nome"
-              @mouseenter="hoverIndex = index"
-              @mouseleave="hoverIndex = null"
-            >
-
-          <img 
-            :src="produto.img" 
-            :alt="produto.nome" 
-            class="produto-imagem"
-          />
-          <h3 class="produto-nome">{{ produto.nome }}</h3>
-
-          <p class="descricao-curta">
-            {{ produto.descricaoCurta }}
-          </p>
-
-          <transition name="fade-slide">
-            <p 
-              v-if="hoverIndex === index" 
-              class="descricao-longa" 
-              aria-live="polite"
-            >
-              {{ produto.descricaoLonga }}
-            </p>
-          </transition>
-
-          <span class="preco">
-            {{ produto.preco }}
-          </span>
-
-          <button class="botao-comprar">
-            Comprar
-          </button>
-        </div>
+        <AppCards :produtos="produtos" />
       </div>
     </section>
     <AppFooter />
   </div>
 </template>
+
 <style scoped>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
-}
 
 .banner {
   width: 100%;
@@ -143,7 +95,7 @@ export default {
   justify-content: center;
   align-items: center;
   text-align: center;
-  background-color: #f9f9f9;
+  background-color: #ffffff;
 }
 
 .chamada-cta h2 {
@@ -163,19 +115,20 @@ export default {
 
 .chamada-cta button {
   background-color: #ea0cf2;
-  color: white;
+  color: #ffffff;
   font-weight: 600;
   font-size: 1.2rem;
   padding: 1rem 2.5rem;
   border: none;
   border-radius: 8px;
   cursor: pointer;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .chamada-cta button:hover,
 .chamada-cta button:focus {
-  background-color: #9b04a8;
+  background-color: #bf0acf;
   transform: translateY(-2px);
   outline: none;
 }
@@ -187,7 +140,7 @@ export default {
   text-transform: uppercase;
   letter-spacing: 0.15em;
   margin: 3rem 0 2rem;
-  background: linear-gradient(90deg, #00a5f1, #f006dc);
+  background: linear-gradient(90deg, #59deff, #3944da, #e718a9, #8f029c);
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
@@ -197,14 +150,12 @@ export default {
 .titulo-produtos::after {
   content: '';
   display: block;
-  width: 900px; 
-  height: 0.4rem; 
-  background: linear-gradient(100deg, #00a5f1, #ee00e2);
-  margin: 10px auto 0; 
+  width: 900px;
+  height: 0.4rem;
+  background: linear-gradient(100deg,  #59deff, #3944da, #e718a9, #8f029c);
+  margin: 10px auto 0;
   border-radius: 8px;
 }
-
-
 
 .container-produtos {
   max-width: 1240px;
@@ -215,230 +166,4 @@ export default {
   justify-content: center;
   gap: 2rem;
 }
-
-.card-produto {
-  width: 300px;
-  min-height: 420px;
-  background: #ffffff;
-  border-radius: 20px;
-  padding: 1.8rem 1.6rem;
-  color: #333333;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  position: relative;
-  transition: box-shadow 0.3s ease, transform 0.25s ease;
-  cursor: pointer;
-  overflow: hidden;
-}
-
-.card-produto:hover,
-.card-produto:focus-within {
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-  transform: translateY(-8px);
-  outline: none;
-}
-.hovered {
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-  transform: translateY(-8px);
-}
-
-.produto-imagem {
-  width: 100%;
-  height: 180px;
-  object-fit: contain;
-  border-radius: 12px;
-  margin-bottom: 1rem;
-  transition: transform 0.3s ease;
-}
-
-.card-produto:hover .produto-imagem,
-.card-produto:focus-within .produto-imagem {
-  transform: scale(1.05);
-}
-
-.produto-nome {
-  font-size: 1.5rem;
-  font-weight: 700;
-  margin-bottom: 0.5rem;
-  color: #222222;
-}
-
-.descricao-curta {
-  font-size: 0.95rem;
-  color: #666666;
-  margin-bottom: 0.8rem;
-  line-height: 1.4;
-}
-
-.descricao-longa {
-  font-size: 0.9rem;
-  color: #777777;
-  margin-bottom: 1rem;
-  line-height: 1.4;
-}
-
-.preco {
-  font-size: 1.3rem;
-  font-weight: 700;
-  color: #ca0df0;
-  margin-bottom: 1.2rem;
-}
-
-.botao-comprar {
-  background-color: #09addf; 
-  color: #ffffff;
-  border: none;
-  padding: 0.75rem 1.2rem;
-  border-radius: 12px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.botao-comprar:hover,
-.botao-comprar:focus {
-  background-color: #275cbe;
-  transform: translateY(-2px);
-  outline: none;
-}
-
-.fade-slide-enter-active, .fade-slide-leave-active {
-  transition: opacity 0.4s ease, transform 0.4s ease;
-}
-
-.fade-slide-enter-from {
-  opacity: 0;
-  transform: translateY(10px);
-}
-
-.fade-slide-enter-to {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.fade-slide-leave-from {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.fade-slide-leave-to {
-  opacity: 0;
-  transform: translateY(10px);
-}
-
-@media (max-width: 1024px) {
-  .container-produtos {
-    justify-content: center;
-  }
-
-  .card-produto {
-    width: 280px;
-  }
-}
-
-@media (max-width: 720px) {
-  .banner {
-    height: 20rem;
-  }
-
-  .chamada-cta h2 {
-    font-size: 1.8rem;
-  }
-
-  .chamada-cta p {
-    font-size: 1rem;
-  }
-
-  .container-produtos {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .card-produto {
-    width: 90%;
-    max-width: 320px;
-  }
-}
-.container-produtos {
-  max-width: 1240px;
-  margin: 0 auto 5rem auto;
-  padding: 0 2rem;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between; 
-  gap: 1rem;
-}
-
-.card-produto {
-  width: calc(25% - 1rem); 
-  min-height: 420px;
-  background: #ffffff;
-  border-radius: 20px;
-  padding: 1.8rem 1.6rem;
-  color: #333333;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  position: relative;
-  transition: box-shadow 0.3s ease, transform 0.25s ease;
-  cursor: pointer;
-  overflow: hidden;
-}
-
-@media (max-width: 1024px) {
-  .container-produtos {
-    justify-content: center;
-  }
-
-  .card-produto {
-    width: calc(33.33% - 1rem);
-  }
-}
-
-@media (max-width: 720px) {
-  .container-produtos {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .card-produto {
-    width: 90%; 
-    max-width: 320px;
-  }
-}
-.card-produto {
-  width: calc(25% - 1rem); 
-  min-height: 420px;
-  background: #ffffff;
-  border-radius: 20px;
-  padding: 1.8rem 1.6rem;
-  color: #333333;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  position: relative;
-  transition: box-shadow 0.3s ease, transform 0.25s ease;
-  cursor: pointer;
-  overflow: hidden;
-}
-
-.card-produto:hover {
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-  transform: translateY(10px); 
-}
-.card-produto:not(:hover) {
-  transform: translateY(0); 
-  transition: transform 0.3s ease; 
-}
-
-.card-produto:hover .produto-imagem {
-  transform: scale(1.05); 
-}
-
 </style>
-

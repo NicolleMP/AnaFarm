@@ -36,8 +36,6 @@ export default {
 .header {
   width: 100%;
   background-color: #0cb7f2;
-  padding: 20px 0;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
 }
 
 .header-container {
@@ -47,7 +45,7 @@ export default {
 }
 
 .logo img {
-  height: 3.75rem;
+  height: 3.95rem;
   transition: transform 0.3s ease;
   margin-left: 6.25rem;
 }
@@ -84,7 +82,7 @@ export default {
   left: 0;
   width: 0;
   height: 2px;
-  background-color: #ffd700;
+  background-color: #ff69b4;
   transition: width 0.3s ease;
 }
 
@@ -93,7 +91,7 @@ export default {
 }
 
 .nav a:hover {
-  color: #ffd700;
+  color: #ff69b4;
 }
 
 .user-icon {
@@ -105,6 +103,6 @@ export default {
 }
 
 .user-icon:hover {
-  color: #ffd700; 
+  color: #ff69b4; 
 }
 </style>
