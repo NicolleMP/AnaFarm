@@ -67,6 +67,9 @@ export default {
 
         alert("Login realizado com sucesso!");
         this.form = { email: "", password: "" };
+        // ✅ Redireciona para a home após login
+        this.$router.push('/home');
+
       } catch (error) {
         console.error(
           "Erro ao fazer login:",
@@ -75,7 +78,7 @@ export default {
         alert("Usuário ou senha inválidos!");
       }
     },
-    //  ALTERAÇÃO: metodo para ir para a tela de registro
+    //   metodo rota para ir para a tela de registro
     irParaRegister() {
       this.$router.push("/register");
     },
